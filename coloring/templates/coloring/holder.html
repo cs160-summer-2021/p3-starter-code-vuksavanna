@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coloring</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static '/coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/coloring/style.css' %}" />
+
+  <!--    <script type="text/javascript" src="{% static '/coloring/vendors/paper/paper.js' %}" ></script> -->
+
+<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/javascript" canvas="canvas">
+  var path;
+  x=0;
+  function onMouseDown(event) { 
+      path = new Path();
+      path.add(event.point);
+  }
+  function onMouseDrag(event) {
+    var circle = Path.Circle(event.point, 50);
+    circle.fillColor = 'red';
+    circle.fillColor.hue += x;
+    x+=10;
+  }
+</script>
+
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="{% static '/coloring/images/logo.png' %}" width="65" height="65" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a id="current" class="nav-link"href="#"><img src="{% static '/coloring/images/group.svg' %}" width="25" height="25" alt=""> &nbsp Work<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><img src="{% static '/coloring/images/gallery icon.svg' %}" width="25" height="25" alt=""> &nbsp Gallery</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><img src="{% static '/coloring/images/Vector.svg' %}" width="25" height="25" alt=""> &nbsp Explore</a>
+      </li>
+    </ul>
+  </div>
+  <img id="arrows"src="{% static '/coloring/images/vector2.svg' %}" width="25" height="25" alt="">
+  
+  <img id="arrows" src="{% static '/coloring/images/vector3.png' %}" width="25" height="25" alt="">
+  
+</nav>
+
+<canvas id="myCanvas" resize></canvas>
+
+<!-- Tools -->
+<div id="toolbar" class="container side-menu">
+	<div class="row"><div class="col"><img id="tool" src="{% static '/coloring/images/eraser.svg' %}" width="70" height="100" alt=""></div></div>
+    <div class="row"><div class="col"><img id="tool" src="{% static '/coloring/images/pencil.svg' %}" width="70" height="100" alt=""></div></div>
+    <div class="row"><div class="col"><img id="tool" src="{% static '/coloring/images/brush.svg' %}" width="70" height="100" alt=""></div></div>
+		<div class="row"><div class="col"><img id="tool" src="{% static '/coloring/images/new pen.svg' %}" width="70" height="100" alt=""></div> </div>
+</div>
+
+
+
+</body>
+</html>
