@@ -34,12 +34,24 @@
 			}
 
       var tool = 1;
+      $('#eraser').click(function () {
+        chooseTool('eraser');
+      })
+      $('#pencil').click(function () {
+        chooseTool('pencil');
+      })
+      $('#brush').click(function () {
+        chooseTool('brush');
+      })
+      $('#pen').click(function () {
+        chooseTool('pen');
+      })
       function chooseTool(toolId) {
         var selectTool = document.getElementById(toolId);
         var toolbarTools = document.getElementById('toolbar').children[0]
 
         if (selectTool.classList.contains('active')) {
-          // open pop up
+          selectTool = document.getElementById('color-palette').classList.toggle('hidden');
         } 
         
         // else {
@@ -295,19 +307,20 @@
   <!-- Tools -->
   <div id="toolbar" class="container side-menu">
     <div class="row">
-      <img id="eraser" class="tool" src="{% static '/coloring/images/eraser.svg' %}" onClick="chooseTool(this.id)">
+      <img id="eraser" class="tool" src="{% static '/coloring/images/eraser.svg' %}">
     </div>
     <div class="row">
-      <img id="pencil" class="tool active" src="{% static '/coloring/images/pencil.svg' %}" onClick="chooseTool(this.id)">
+      <img id="pencil" class="tool active" src="{% static '/coloring/images/pencil.svg' %}">
     </div>
     <div class="row">
-      <img id="brush" class="tool" src="{% static '/coloring/images/brush.svg' %}" onClick="chooseTool(this.id)">
+      <img id="brush" class="tool" src="{% static '/coloring/images/brush.svg' %}">
     </div>
     <div class="row">
-      <img id="pen" class="tool" src="{% static '/coloring/images/pen.svg' %}" onClick="chooseTool(this.id)">
+      <img id="pen" class="tool" src="{% static '/coloring/images/pen.svg' %}">
     </div>
 
   </div>
   <div id="color-palette" class="hidden"></div>
+  
 </body>
 </html>
