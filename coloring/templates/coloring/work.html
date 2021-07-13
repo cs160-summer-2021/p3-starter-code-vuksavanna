@@ -99,20 +99,20 @@
           if (tool === 0) {
             path.strokeColor = "white";
           }
-          else if (tool === 2) {
-            path.strokeColor = cp.history[cp.history.length - 1];
-          } else if (tool === 3) {
-            path.strokeColor = cp.history[cp.history.length - 1];
-          } else {
+          // else if (tool === 2) {
+          //   path.strokeColor = cp.history[cp.history.length - 1];
+          // } else if (tool === 3) {
+          //   path.strokeColor = cp.history[cp.history.length - 1];
+          // }
+          else {
             path.strokeColor = cp.history[cp.history.length - 1];
           }
           path.strokeWidth = 50;
           
         }
-          
         tool.onMouseDrag = function(event) {
-          path.add(event.point);
-          // path.smooth();         
+        path.add(event.point);
+        path.smooth();       
 				}     
 			}
 
@@ -121,8 +121,7 @@
 
 				// create a swatch for each color
 				for (var i = colors.length - 1; i >= 0; i--) {
-					var $swatch = $("<div>").css("background-color", colors[i])
-									   .addClass("swatch");
+					var $swatch = $("<div>").css("background-color", colors[i]).addClass("swatch");
 					$swatch.click(function(){
 						// add color to the color palette history
 					  	cp.history.push($(this).css("background-color"));
