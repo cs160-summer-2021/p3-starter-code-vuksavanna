@@ -18,13 +18,18 @@
     window.onload = function() {
 			var canvas = document.getElementById('myCanvas');
 
-			// coloring page
-			// var mandala = {
-			// 	item: null,
-			// 	lastClicked: null,
-			// 	filePath: '/static/coloring/images/mandala-freepik.svg'
-      //   // filePath: '/static/coloring/images/scribble-1.svg'
-			// };
+      // inspired by Shm's "All Powerful Bun" :DD
+      var randomScribble = new Array("/static/coloring/images/scribbles/scribble-1.svg", "/static/coloring/images/scribbles/scribble-2.svg", 
+      "/static/coloring/images/scribbles/scribble-3.svg", "/static/coloring/images/scribbles/scribble-4.svg");
+      num = Math.floor(Math.random() * randomScribble.length);
+      // 
+
+			var mandala = {
+				item: null,
+				lastClicked: null,
+				// filePath: '/static/coloring/images/mandala-freepik.svg'
+        filePath: randomScribble[num]
+			};
 
 			// color palette
 			var cp = {
@@ -33,19 +38,24 @@
 				$container: $('#color-palette')
 			}
 
-      var tool = 1;
+      var toolSelect = 1;
       $('#eraser').click(function () {
         chooseTool('eraser');
+        toolSelect = 0;
       })
       $('#pencil').click(function () {
         chooseTool('pencil');
+        toolSelect = 1;
       })
       $('#brush').click(function () {
         chooseTool('brush');
+        toolSelect = 2;
       })
       $('#pen').click(function () {
         chooseTool('pen');
+        toolSelect = 3;
       })
+      
       function chooseTool(toolId) {
         var selectTool = document.getElementById(toolId);
         var toolbarTools = document.getElementById('toolbar').children[0]
@@ -75,35 +85,39 @@
             document.getElementById('pen').classList.toggle('active');
           }
           selectTool.classList.toggle('active');
-          tool = 0;
         }
-
-        // if (toolId === 'eraser') {
-        //   tool = 0;
-        // } else if (toolId === 'pencil') {
-        //   tool = 1;
-        // } else if (toolId === 'brush') {
-        //   tool = 2;
-        // } else {
-        //   tool = 3
-        // }
       }
 
       function drawingInteraction() {
 				var tool = new paper.Tool();
         tool.minDistance = 2;
         var path;
-
+        // var circle;
         tool.onMouseDown = function(event) {
           path = new paper.Path();
-          if (tool === 0) {
+          if (toolSelect === 0) {
             path.strokeColor = "white";
+          } else if (tool === 1) {
+            path.strokeColor = cp.history[cp.history.length - 1];
+            // path.smooth(); 
+            // var circle = Path.Circle(event.point, 50);
+          } else if (tool === 2) {
+            path.strokeColor = cp.history[cp.history.length - 1];
+            // path.opacity = 0.5;
+            
+            // path.blendMode = 'multiply';
+            
+            // var circle = Path.Circle(event.point, 50);
+            // circle.fillColor = {
+            //     gradient: {
+            //     stops: [['red', 0.1], ['white', 1]],
+            //     radial: true
+            // },
+            // origin: circle.position,
+            // destination: circle.bounds.rightCenter
+            // };
+            // circle.opacity = 0.5;
           }
-          // else if (tool === 2) {
-          //   path.strokeColor = cp.history[cp.history.length - 1];
-          // } else if (tool === 3) {
-          //   path.strokeColor = cp.history[cp.history.length - 1];
-          // }
           else {
             path.strokeColor = cp.history[cp.history.length - 1];
           }
@@ -111,8 +125,7 @@
           
         }
         tool.onMouseDrag = function(event) {
-        path.add(event.point);
-        path.smooth();       
+        path.add(event.point);      
 				}     
 			}
 
@@ -146,8 +159,25 @@
 				paper.setup(canvas);
 				getColorsCreatePalette();
 
-        drawingInteraction();
+				paper.project.importSVG(mandala.filePath, function(item) {
+					mandala.item = item._children["design-freepik"];
+				    paper.project.insertLayer(0,mandala.item);
+
+				    if (custom) {
+				    	drawingInteraction();
+				    } else {
+				    	myGradientInteraction();
+				    }
+
+				});
 			}
+
+      // function init(custom){
+			// 	paper.setup(canvas);
+			// 	getColorsCreatePalette();
+
+      //   drawingInteraction();
+			// }
 
 			init(true);
 		}
@@ -176,10 +206,12 @@
 
 		#myCanvas {
 			padding-left: 0;
-		    padding-right: 0;
-		    margin-left: auto;
-		    margin-right: auto;
-		    display: block;
+      padding-right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      
+        
 		}
     /* body {
       background-image: url('static/coloring/images/scribble-1.svg');
@@ -215,8 +247,10 @@
     }
 
     canvas[resize] {
-            width: 100%;
-            height: 100%;
+            /* width: 100%;
+            height: 100%; */
+            width: 900px;
+            height: 475px;
         }
     
     /* .row {
@@ -298,10 +332,6 @@
   </nav>
 
   <canvas id="myCanvas" resize></canvas>
-  
-  <div id="drawing-space">
-      <img class="scribble" src="{% static '/coloring/images/scribble-1.svg' %}" >
-  </div>
 
   <!-- Tools -->
   <div id="toolbar" class="container side-menu">
