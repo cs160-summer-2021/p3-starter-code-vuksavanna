@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coloring</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static '/coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+
+</head>
+<style>
+
+  .filter-blue{
+        filter: invert(41%) sepia(73%) saturate(2299%) hue-rotate(209deg) brightness(101%) contrast(94%);
+    }
+
+    #current {
+        color: #4E7EF8;
+    }
+
+    #logo {
+      /* width: 20%;
+      height: 20%; */
+      width: 64px;
+      height: 65px;
+    }
+
+</style>
+<body>
+
+<div class="container-flex">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img id="logo" src="{% static '/coloring/images/logo.png' %}" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="work.html">
+              <img src="{% static '/coloring/images/paper-icon.svg' %}"  alt="" > &nbsp Work
+          </a>
+        </li>
+        <li class="nav-item">
+          <a id="current"class="nav-link" href="">
+            <img class="filter-blue" src="{% static '/coloring/images/gallery icon.svg' %}"  alt=""> &nbsp Gallery
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <img src="{% static '/coloring/images/Vector.svg' %}" alt=""> &nbsp Explore
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+    <!-- gallery images -->
+    <div class="container">
+      <div class="row pt-5">
+        <div class="col">
+          <a href="work.html">
+          <img src="{% static '/coloring/images/add-icon.png' %}" alt="" class="img-thumbnail"></a></div>
+          <div class="col">
+          <img src="{% static '/coloring/images/cool-hat.svg' %}" alt="" class="img-thumbnail"></div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+      </div>
+      <div class="row p-0">
+        <div class="col">Blank Page</div>
+          <div class="col">A Very Cool Hat</div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+      </div>
+    </div>

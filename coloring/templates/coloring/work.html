@@ -97,40 +97,49 @@
 				var tool = new paper.Tool();
         tool.minDistance = 2;
         var path;
+        var cirlcePath;
         // var circle;
         tool.onMouseDown = function(event) {
           path = new paper.Path();
+          circlePath = new paper.Path();
           if (toolSelect === 0) {
             path.strokeColor = "white";
-          } else if (tool === 1) {
+            path.strokeCap = 'round';
+            path.smooth(); 
+          } else if (toolSelect === 1) {
             path.strokeColor = cp.history[cp.history.length - 1];
-            // path.smooth(); 
-            // var circle = Path.Circle(event.point, 50);
-          } else if (tool === 2) {
-            path.strokeColor = cp.history[cp.history.length - 1];
-            // path.opacity = 0.5;
+            path.strokeCap = 'round';
+            path.smooth(); 
+          } else if (toolSelect === 2) {
             
-            // path.blendMode = 'multiply';
-            
-            // var circle = Path.Circle(event.point, 50);
-            // circle.fillColor = {
-            //     gradient: {
-            //     stops: [['red', 0.1], ['white', 1]],
-            //     radial: true
-            // },
-            // origin: circle.position,
-            // destination: circle.bounds.rightCenter
-            // };
-            // circle.opacity = 0.5;
+            circlePath.strokeColor = cp.history[cp.history.length - 1];
+             // var circle = Path.Circle(event.point, 50);
           }
           else {
             path.strokeColor = cp.history[cp.history.length - 1];
           }
           path.strokeWidth = 50;
-          
+          // circlePath.
         }
+        
         tool.onMouseDrag = function(event) {
-        path.add(event.point);      
+          if (toolSelect === 2) {
+            circlePath.add(event.point);
+            var circle = new Path.Circle(event.point, 50);
+            circle.fillColor = {
+              gradient: {
+                stops: [[cp.history[cp.history.length - 1], 0], ['white', .9]],
+                radial: true
+              },
+              origin: circle.position,
+              destination: circle.bounds.rightCenter
+            };
+            circle.opacity = 0.5;
+            circle.blendMode = 'multiply';
+          } else {
+            path.add(event.point);  
+          }
+              
 				}     
 			}
 
