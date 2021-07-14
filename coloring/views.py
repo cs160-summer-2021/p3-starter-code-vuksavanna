@@ -8,3 +8,7 @@ def demo(request):
     return render(request, 'coloring/demo.html')
 def work(request):
     return render(request, 'coloring/work.html')
+def gallery(request):
+    return render(request, 'coloring/gallery.html')
+def explore(request):
+    return render(request, 'coloring/explore.html')
