@@ -38,6 +38,11 @@
 				$container: $('#color-palette')
 			}
 
+      $("#logo").click(function () {
+        location.reload();
+        return false;
+      })
+
       var toolSelect = 1;
       $('#eraser').click(function () {
         chooseTool('eraser');
