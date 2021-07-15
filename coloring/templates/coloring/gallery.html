@@ -5,6 +5,9 @@
 <head>
 	<title>Coloring</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static '/coloring/vendors/bootstrap/css/bootstrap.css' %}" />
 
 </head>
@@ -24,6 +27,13 @@
       width: 64px;
       height: 65px;
     }
+
+    h1 {
+    font-family: font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+}
 
 </style>
 <body>
@@ -60,15 +70,19 @@
     <!-- gallery images -->
     <div class="container">
       <div class="row pt-5">
+        <div class="col"><center><h1>My Works</h1></center></div>
+        </div>
+      <div class="row pt-5">
         <div class="col">
-          <img class="img-thumbnail" src="{% static '/coloring/images/add-icon.png' %}" href="../coloring/gallery"></div>
+          <a href="../coloring/work">
+          <img src="{% static '/coloring/images/add-icon.png' %}" alt="" class="img-thumbnail"></a></div>
           <div class="col">
           <img src="{% static '/coloring/images/cool-hat.svg' %}" alt="" class="img-thumbnail"></div>
           <div class="col-2"></div>
           <div class="col-2"></div>
       </div>
       <div class="row p-0">
-        <div class="col" >Blank Page</div>
+        <div class="col">Blank Page</div>
           <div class="col">A Very Cool Hat</div>
           <div class="col-2"></div>
           <div class="col-2"></div>

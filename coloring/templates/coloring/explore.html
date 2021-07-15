@@ -5,6 +5,9 @@
 <head>
 	<title>Coloring</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static '/coloring/vendors/bootstrap/css/bootstrap.css' %}" />
 
 </head>
@@ -23,6 +26,13 @@
       height: 20%; */
       width: 64px;
       height: 65px;
+    }
+
+    h1 {
+    font-family: font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
     }
 
 </style>
@@ -58,6 +68,9 @@
 
     <!-- gallery images -->
     <div class="container">
+      <div class="row pt-5">
+        <div class="col"><center><h1>Check Out Some Works For Inspiration!</h1></center></div>
+        </div>
       <div class="row pt-5">
         <div class="col">
           <img src="{% static '/coloring/images/cotton-candy.svg' %}" alt="" class="img-thumbnail"></div>
